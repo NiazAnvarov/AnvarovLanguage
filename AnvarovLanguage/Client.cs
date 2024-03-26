@@ -30,7 +30,7 @@ namespace AnvarovLanguage
         public string GenderCode { get; set; }
         public string Phone { get; set; }
         public string PhotoPath { get; set; }
-        public Nullable<System.DateTime> Birthday { get; set; }
+        public System.DateTime Birthday { get; set; }
         public string Email { get; set; }
         public System.DateTime RegistrationDate { get; set; }
         
@@ -40,6 +40,24 @@ namespace AnvarovLanguage
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tag> Tag { get; set; }
 
+        public string BirthdayFormat
+        {
+            get
+            {
+
+                return Birthday.ToShortDateString();
+            }
+        }
+
+        public string RegistrationDateFormat
+        {
+            get
+            {
+
+                return RegistrationDate.ToShortDateString();
+            }
+        }
+
         public int VisitCount
         {
             get
@@ -48,11 +66,14 @@ namespace AnvarovLanguage
             }
         }
 
-        public System.DateTime LastVisitDate
+        public string LastVisitDate
         {
             get
             {
-                return AnvarovLanguageEntities.GetContext().ClientService.Where(x => x.ClientID == this.ID).Max(p => p.StartTime);
+                if (VisitCount == 0)
+                    return "нет посещений";
+                else
+                    return AnvarovLanguageEntities.GetContext().ClientService.Where(x => x.ClientID == this.ID).Max(p => p.StartTime).ToString();
             }
         }
     }

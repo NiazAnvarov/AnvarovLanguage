@@ -10,8 +10,8 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <!--<RowDefinition Height="8*"/>-->
 
@@ -23,8 +23,8 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-
-        <ListView Name="ClientListView" Grid.ColumnSpan="3" Grid.Row="0" Grid.RowSpan="2">
+        
+        <ListView Name="ClientListView" Grid.ColumnSpan="3" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -60,7 +60,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
                             <TextBlock Text="Дата рождения: "/>
-                            <TextBlock Text="{Binding Birthday, StringFormat=dd.mm.yyyy}"/>
+                            <TextBlock Text="{Binding BirthdayFormat}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
                             <TextBlock Text="Телефон: "/>
@@ -72,7 +72,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1">
                             <TextBlock Text="Дата регистрации: "/>
-                            <TextBlock Text="{Binding RegistrationDate, StringFormat=dd.mm.yyyy}"/>
+                            <TextBlock Text="{Binding RegistrationDateFormat}"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="1">
                             <TextBlock Text="Дата последнего посещения: "/>
@@ -82,6 +82,7 @@
                             <TextBlock Text="Количество посещений: "/>
                             <TextBlock Text="{Binding VisitCount}"/>
                         </StackPanel>
+                        <Button Name="BtnDelete" Content="Удалить" Click="BtnDelete_Click" Grid.Column="3" Grid.Row="7"/>
                         <Image Width="200" Grid.RowSpan="8" Grid.Column="0" HorizontalAlignment="Center">
                             <Image.Source>
                                 <Binding Path="PhotoPath">
@@ -94,13 +95,30 @@
                             </Image.Source>
                         </Image>
 
-                        
-
-
-
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="3">
+            <TextBlock Text="Выводить по "/>
+            <ComboBox Name="strCount" Width="100" SelectionChanged="strCount_SelectionChanged">
+                <TextBlock>10</TextBlock>
+                <TextBlock>50</TextBlock>
+                <TextBlock>200</TextBlock>
+                <TextBlock>Все</TextBlock>
+            </ComboBox>
+            <TextBlock Name="TBCount" FontSize="20" VerticalAlignment="Center" Height="25"></TextBlock>
+            <TextBlock Text=" из " VerticalAlignment="Center"/>
+            <TextBlock Name="TBAllRecords" FontSize="20" VerticalAlignment="Center" Height="25"></TextBlock>
+            <Button Name="LeftDirButton" Content="&lt;" Width="20" Height="25" Click="LeftDirButton_Click"></Button>
+            <ListBox FontSize="20" Name="PageListBox" MouseUp="PageListBox_MouseUp">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+            <Button Name="RightDirButton" Content="&gt;" Width="20" Height="25" Click="RightDirButton_Click"/>
+        </StackPanel>
     </Grid>
 </Page>
