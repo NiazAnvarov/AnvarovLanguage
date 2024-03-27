@@ -23,7 +23,26 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
+            <TextBlock Text="Введите название для поиска"/>
+            <TextBlock Text="Выберите пол для фильтра"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
+            <TextBox Name="TBoxSearch" TextChanged="TBoxSearch_TextChanged"/>
+            <ComboBox Name="FiltrBox" Width="275" SelectionChanged="FiltrBox_SelectionChanged">
+                <TextBlock Text="Все"/>
+                <TextBlock Text="Женский"/>
+                <TextBlock Text="Мужской"/>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="0"  Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <ComboBox Name="SortBox" Width="275" SelectionChanged="SortBox_SelectionChanged">
+                <TextBlock>По умолчанию</TextBlock>
+                <TextBlock>От А до Я</TextBlock>
+                <!--<TextBlock>по дате последнего посещения</TextBlock>-->
+                <TextBlock>по количеству посещений</TextBlock>
+            </ComboBox>
+        </StackPanel>
         <ListView Name="ClientListView" Grid.ColumnSpan="3" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>

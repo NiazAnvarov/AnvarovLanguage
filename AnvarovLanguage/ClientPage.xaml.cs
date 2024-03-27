@@ -35,8 +35,9 @@ namespace AnvarovLanguage
             List<Client> currentClients = AnvarovLanguageEntities.GetContext().Client.ToList();
 
             ClientListView.ItemsSource = currentClients;
-
+            FiltrBox.SelectedIndex = 0;
             strCount.SelectedIndex = 0;
+            SortBox.SelectedIndex = 0;
             TBAllRecords.Text = AnvarovLanguageEntities.GetContext().Client.ToList().Count().ToString();
             Update();
         }
@@ -44,6 +45,30 @@ namespace AnvarovLanguage
         public void Update()
         {
             var currentClient = AnvarovLanguageEntities.GetContext().Client.ToList();
+
+            if (SortBox.SelectedIndex == 1)
+            {
+                currentClient = currentClient.OrderBy(p => p.FirstName).ToList();
+            }
+            //else if (SortBox.SelectedIndex == 2)
+            //{
+            //    currentClient = currentClient.OrderBy(p => DateTime.Parse(p.LastVisitDate)).ToList();
+            //}
+            else if(SortBox.SelectedIndex == 2)
+            {
+                currentClient = currentClient.OrderBy(p => p.VisitCount).ToList();
+            }
+
+            if(FiltrBox.SelectedIndex == 1)
+            {
+                currentClient = currentClient.Where(p => p.GenderCode == "ж").ToList();
+            }
+            else if (FiltrBox.SelectedIndex == 2)
+            {
+                currentClient = currentClient.Where(p => p.GenderCode == "м").ToList();
+            }
+
+            currentClient = currentClient.Where(p => p.LastName.ToLower().Contains(TBoxSearch.Text.ToLower()) || p.FirstName.ToLower().Contains(TBoxSearch.Text.ToLower()) || p.Patronymic.ToLower().Contains(TBoxSearch.Text.ToLower()) || p.Email.ToLower().Contains(TBoxSearch.Text.ToLower()) || p.Phone.Replace("+", "").Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "").ToLower().Contains(TBoxSearch.Text.Replace("+", "").Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "").ToLower())).ToList();
 
             TBAllRecords.Text = AnvarovLanguageEntities.GetContext().Client.ToList().Count().ToString();
             TBCount.Text = currentClient.Count().ToString();
@@ -151,7 +176,7 @@ namespace AnvarovLanguage
 
                     //min = CurrentPage * CountInPage + CountInPage < CountRecords ? CurrentPage * CountInPage + CountInPage : CountRecords;
                     //TBCount.Text = min.ToString();
-                    TBAllRecords.Text = CountRecords.ToString();
+                    //TBAllRecords.Text = CountRecords.ToString();
 
                     ClientListView.ItemsSource = CurrentPageList;
 
@@ -203,6 +228,21 @@ namespace AnvarovLanguage
             {
                 MessageBox.Show("Невозможно выполнить удаление, так как клиент посещал школу!");
             }
+        }
+
+        private void TBoxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Update();
+        }
+
+        private void FiltrBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Update();
+        }
+
+        private void SortBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Update();
         }
     }
 }
