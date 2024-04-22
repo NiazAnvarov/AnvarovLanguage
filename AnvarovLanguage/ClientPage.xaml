@@ -39,7 +39,7 @@
             <ComboBox Name="SortBox" Width="275" SelectionChanged="SortBox_SelectionChanged">
                 <TextBlock>По умолчанию</TextBlock>
                 <TextBlock>От А до Я</TextBlock>
-                <!--<TextBlock>по дате последнего посещения</TextBlock>-->
+                <TextBlock>по дате последнего посещения</TextBlock>
                 <TextBlock>по количеству посещений</TextBlock>
             </ComboBox>
         </StackPanel>
@@ -101,7 +101,11 @@
                             <TextBlock Text="Количество посещений: "/>
                             <TextBlock Text="{Binding VisitCount}"/>
                         </StackPanel>
-                        <Button Name="BtnDelete" Content="Удалить" Click="BtnDelete_Click" Grid.Column="3" Grid.Row="7"/>
+                        <StackPanel Orientation="Horizontal" Grid.Column="3" Grid.Row="7">
+                            <Button Name="BtnDelete" Content="Удалить" Click="BtnDelete_Click"/>
+                            <Button Name="BtnAddEdit" Content="Редактировать" Click="BtnAddEdit_Click"/>
+                        </StackPanel>
+                        
                         <Image Width="200" Grid.RowSpan="8" Grid.Column="0" HorizontalAlignment="Center">
                             <Image.Source>
                                 <Binding Path="PhotoPath">
@@ -118,6 +122,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button Content="Добавить" Name="AddClient" Click="AddClient_Click" Grid.Row="2" Grid.Column="0"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2" Grid.ColumnSpan="3">
             <TextBlock Text="Выводить по "/>
             <ComboBox Name="strCount" Width="100" SelectionChanged="strCount_SelectionChanged">

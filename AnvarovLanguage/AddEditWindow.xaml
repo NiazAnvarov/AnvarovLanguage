@@ -1,0 +1,78 @@
+﻿<Window x:Class="AnvarovLanguage.AddEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnvarovLanguage"
+        mc:Ignorable="d"
+        Title="Редактирование" FontFamily="Comic Sans MS" Icon="Resources/school_logo.ico" Height="630" Width="800" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="5">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="ID" Name="IDText" HorizontalAlignment="Center"></TextBlock>
+                <TextBox Text="{Binding ID}" Name="IDBox" Width="50" IsReadOnly="True"/>
+            </StackPanel> 
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="Фамилия" HorizontalAlignment="Center"></TextBlock>
+                <TextBox Name="FirstNameBox" TextChanged="FirstNameBox_TextChanged" Text="{Binding FirstName}" Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="Имя" HorizontalAlignment="Center"></TextBlock>
+                <TextBox Name="LastNameBox" TextChanged="LastNameBox_TextChanged" Text="{Binding LastName}" Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="Отчество" HorizontalAlignment="Center"></TextBlock>
+                <TextBox Name="PatronymicBox" TextChanged="PatronymicBox_TextChanged" Text="{Binding Patronymic}" Width="200"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="5">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="EMAIL" HorizontalAlignment="Center"></TextBlock>
+                <TextBox Name="EmailBox" TextChanged="EmailBox_TextChanged" Text="{Binding Email}" Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="Телефон" HorizontalAlignment="Center"></TextBlock>
+                <TextBox Name="PhoneBox" TextChanged="PhoneBox_TextChanged" Text="{Binding Phone}" Width="200"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="5">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="Дата рождения" HorizontalAlignment="Center"></TextBlock>
+                <DatePicker Name="BirthdayDate" Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="Пол" HorizontalAlignment="Center"></TextBlock>
+                <ComboBox Name="GenderCodeBox" Width="120">
+                    <TextBlock>Мужской</TextBlock>
+                    <TextBlock>Женский</TextBlock>
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="3" Margin="5">
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="Изображение" HorizontalAlignment="Center"></TextBlock>
+                <Image Name="PhotoImage" Stretch="UniformToFill" Height="200" Width="auto" HorizontalAlignment="Center" Margin="5">
+                    <Image.Source>
+                        <Binding Path="PhotoPath">
+                            <Binding.TargetNullValue>
+                                <ImageSource>
+                                    Resources/school_logo.png
+                                </ImageSource>
+                            </Binding.TargetNullValue>
+                        </Binding>
+                    </Image.Source>
+                </Image>
+                <Button Content="Изменить" Name="ChangePictureBtn" Click="ChangePictureBtn_Click" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </StackPanel>
+        <Button Name="ClientSave" Content="Сохранить" Grid.Row="5" Click="ClientSave_Click" HorizontalAlignment="Right"/>
+    </Grid>
+</Window>

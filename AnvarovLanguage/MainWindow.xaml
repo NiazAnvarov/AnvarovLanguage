@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnvarovLanguage"
         mc:Ignorable="d"
-        Title="Языковая Школа Анваров" FontFamily="Comic Sans MS" Height="800" Width="1200" MinHeight="800" MinWidth="1300" Icon="Resources/school_logo.ico">
+        Title="Языковая Школа Анваров" FontFamily="Comic Sans MS" Height="800" Width="1340" MinHeight="800" MinWidth="1340" Icon="Resources/school_logo.ico">
     <Grid Background="#FFE7FABF">
         <Grid.RowDefinitions>
             <RowDefinition Height="150"></RowDefinition>

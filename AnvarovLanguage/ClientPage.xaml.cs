@@ -50,11 +50,11 @@ namespace AnvarovLanguage
             {
                 currentClient = currentClient.OrderBy(p => p.FirstName).ToList();
             }
-            //else if (SortBox.SelectedIndex == 2)
-            //{
-            //    currentClient = currentClient.OrderBy(p => DateTime.Parse(p.LastVisitDate)).ToList();
-            //}
-            else if(SortBox.SelectedIndex == 2)
+            else if (SortBox.SelectedIndex == 2)
+            {
+                currentClient = currentClient.OrderByDescending(p => DateTime.Parse((p.LastVisitDate.ToString() != "нет посещений") ? p.LastVisitDate.ToString() : "01.01.1991 09:00")).ToList();
+            }
+            else if(SortBox.SelectedIndex == 3)
             {
                 currentClient = currentClient.OrderBy(p => p.VisitCount).ToList();
             }
@@ -242,6 +242,18 @@ namespace AnvarovLanguage
 
         private void SortBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Update();
+        }
+
+        private void BtnAddEdit_Click(object sender, RoutedEventArgs e)
+        {
+            new AddEditWindow((sender as Button).DataContext as Client).ShowDialog();
+            Update();
+        }
+
+        private void AddClient_Click(object sender, RoutedEventArgs e)
+        {
+            new AddEditWindow(null).ShowDialog();
             Update();
         }
     }
